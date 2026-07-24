@@ -1,15 +1,17 @@
 const express = require ("express")
 const app = express()
 const cors = require("cors")
+const dns = require("dns");
+
+dns.setDefaultResultOrder("ipv4first");
 const dotenv = require("dotenv").config()
 const blogRoute = require("./routes/blogRoute")
 const mongoose = require("mongoose")
 
 
-
-
+console.log(process.env.MONGODB_URI);
 //DataBase
-mongoose.connect("mongodb://127.0.0.1:27017/blog_app").then(()=>{
+mongoose.connect(process.env.MONGODB_URI).then(()=>{
     console.log("Successfully connected DB 🥳")
 }).catch((err)=>{
     console.log(err)
